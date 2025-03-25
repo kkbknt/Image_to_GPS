@@ -1,21 +1,6 @@
-# 必要なパッケージをリスト化
-packages = [
-    "os",            # 標準ライブラリ - インストール不要
-    "zipfile",       # 標準ライブラリ - インストール不要
-    "shutil",        # 標準ライブラリ - インストール不要
-    "exifread",      # exifread パッケージ
-    "pandas",        # pandas パッケージ
-    "streamlit",     # streamlit パッケージ
-    "io",            # 標準ライブラリ - インストール不要
-    "pillow-heif",   # pillow-heif パッケージ
-    "PIL"            # pillow パッケージ (PIL は pillow に含まれる)
-]
-
 # インストールが必要なパッケージのみを記載
-requirements = [
-    "exifread",
-    "pandas",
-    "streamlit",
-    "pillow-heif",
-    "pillow"
-]
+exifread
+pandas
+streamlit
+pillow-heif
+pillow
