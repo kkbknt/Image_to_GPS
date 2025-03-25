@@ -214,6 +214,10 @@ if uploaded_file is not None:
 
             # 地図上に位置情報を可視化
             df = pd.DataFrame(data)
+            df = df.rename(columns={
+                "Latitude": "latitude",
+                "Longitude": "longitude"
+            })
             if not df.empty:
                 st.map(df[["Latitude", "Longitude"]])
     
