@@ -219,7 +219,7 @@ if uploaded_file is not None:
                 "Longitude": "longitude"
             })
             if not df.empty:
-                st.map(df[["Latitude", "Longitude"]])
+                st.map(df[["latitude", "longitude"]])
     
     except Exception as e:
         st.error(f"❌ エラーが発生しました: {e}")
