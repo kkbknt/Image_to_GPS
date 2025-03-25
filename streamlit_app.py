@@ -181,16 +181,16 @@ class ImageGpsExtractor:
 extractor = ImageGpsExtractor(output_folder="output")
 
 # Streamlitインターフェース
-st.title("GPS情報抽出アプリ")
-st.write("ZIPファイルに含まれる画像 (JPG, PNG, HEIC) からGPS情報を抽出してCSVに保存")
+st.title("Image GPS Extractor")
+st.image("logo.png")
+st.write("ZIPファイルに含まれる画像 (JPG, PNG, HEIC) からGPS情報を抽出してCSVに保存できます。")
 
 # ファイルをアップロード
-uploaded_file = st.file_uploader("ZIPファイルをアップロード", type=["zip"])
+uploaded_file = st.file_uploader("ZIPファイルをアップロードしてください。", type=["zip"])
 
 if uploaded_file is not None:
     try:
         # ZIPファイルの処理
-        st.info("処理を開始します...")
         extracted_path = extractor.extract_zip(BytesIO(uploaded_file.read()))
         data = extractor.extract_gps_from_images(extracted_path)
 
@@ -206,13 +206,16 @@ if uploaded_file is not None:
             
             # ダウンロードボタン
             st.download_button(
-                label="CSVファイルをダウンロード",
+                label="CSVファイルをダウンロードしてください！",
                 data=csv_data,
                 file_name="gps_data.csv",
                 mime="text/csv"
             )
 
-            st.success("✅ GPS情報をCSVに保存しました！")
+            # 地図上に位置情報を可視化
+            df = pd.DataFrame(data)
+            if not df.empty:
+                st.map(df[["Latitude", "Longitude"]])
     
     except Exception as e:
         st.error(f"❌ エラーが発生しました: {e}")
