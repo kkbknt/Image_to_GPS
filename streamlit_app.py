@@ -190,7 +190,7 @@ user_id = st.text_input("学籍番号を入力してください。")
 # ファイルをアップロード
 uploaded_file = st.file_uploader("ZIPファイルをアップロードしてください。", type=["zip"])
 
-if uploaded_file is not None:
+if uploaded_file is not None and user_id.strip():
     try:
         # インスタンス生成
         extractor = ImageGpsExtractor(output_folder="output", user_id=user_id)
@@ -228,3 +228,4 @@ if uploaded_file is not None:
     
     except Exception as e:
         st.error(f"❌ エラーが発生しました: {e}")
+
