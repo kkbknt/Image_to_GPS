@@ -14,8 +14,9 @@ register_heif_opener()
 
 
 class ImageGpsExtractor:
-    def __init__(self, output_folder: str):
+    def __init__(self, output_folder: str, user_id: str):
         self.output_folder = output_folder
+        self.user_id = user_id
         self.unzip_path = f"{output_folder}/unzip"
         os.makedirs(self.unzip_path, exist_ok=True)
 
@@ -145,6 +146,7 @@ class ImageGpsExtractor:
                     # GPS情報が取得できた場合のみデータに追加
                     if lat and lon:
                         data.append({
+                            "UserID": self.user_id,
                             "File": file,
                             "Latitude": lat,
                             "Longitude": lon,
@@ -177,19 +179,22 @@ class ImageGpsExtractor:
 
 
 
-# インスタンス生成
-extractor = ImageGpsExtractor(output_folder="output")
-
 # Streamlitインターフェース
 st.title("Image GPS Extractor")
 st.image("logo.png")
 st.write("ZIPファイルに含まれる画像 (JPG, PNG, HEIC) からGPS情報を抽出してCSVに保存できます。")
+
+# 学籍番号入力欄を追加
+user_id = st.text_input("学籍番号を入力してください。")
 
 # ファイルをアップロード
 uploaded_file = st.file_uploader("ZIPファイルをアップロードしてください。", type=["zip"])
 
 if uploaded_file is not None:
     try:
+        # インスタンス生成
+        extractor = ImageGpsExtractor(output_folder="output", user_id=user_id)
+
         # ZIPファイルの処理
         extracted_path = extractor.extract_zip(BytesIO(uploaded_file.read()))
         data = extractor.extract_gps_from_images(extracted_path)
