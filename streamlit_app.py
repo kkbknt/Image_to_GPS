@@ -180,7 +180,7 @@ class ImageGpsExtractor:
 
 
 # Streamlitインターフェース
-st.title("Image GPS Extractor")
+st.title("Image GPS Extractor ver2")
 st.image("logo.png")
 st.write("ZIPファイルに含まれる画像 (JPG, PNG, HEIC) からGPS情報を抽出してCSVに保存できます。")
 
