@@ -180,7 +180,7 @@ class ImageGpsExtractor:
 
 
 # Streamlitインターフェース
-st.title("Image GPS Extractor ver2")
+st.title("Image GPS Extractor")
 st.image("logo.png")
 st.write("ZIPファイルに含まれる画像 (JPG, PNG, HEIC) からGPS情報を抽出してCSVに保存できます。")
 
@@ -213,7 +213,7 @@ if uploaded_file is not None and user_id.strip():
             st.download_button(
                 label="CSVファイルをダウンロードしてください！",
                 data=csv_data,
-                file_name="gps_data.csv",
+                file_name=f"{user_id}_gps_data.csv",
                 mime="text/csv"
             )
 
